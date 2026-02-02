@@ -1,7 +1,10 @@
-export default function App() {
+import React from 'react'
+import Header from './Components/Header'
+
+function App() {
   return (
-    <h1 className="text-4xl font-bold text-blue-600">
-      Tailwind Working 🚀
-    </h1>
+    <Header />
   )
 }
+
+export default App
