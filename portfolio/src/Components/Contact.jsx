@@ -1,5 +1,6 @@
 import React from "react";
-import { Mail, Phone, Headphones, Facebook, Github, Linkedin, Instagram, } from "lucide-react";
+import { Mail, Phone, Headphones, Facebook, Github, Linkedin, Instagram } from "lucide-react";
+import { motion } from "framer-motion";
 
 function Contact() {
   return (
@@ -7,7 +8,13 @@ function Contact() {
       <div className="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-2 gap-12">
 
         {/* Contact Form */}
-        <div className="bg-gradient-to-br from-slate-900 to-slate-800 p-6 sm:p-8 rounded-2xl shadow-xl">
+        <motion.div
+          className="bg-gradient-to-br from-slate-900 to-slate-800 p-6 sm:p-8 rounded-2xl shadow-xl"
+          initial={{ opacity: 0, x: -80 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: false, amount: 0.3 }}
+          transition={{ duration: 0.8 }}
+        >
           <h2 className="text-2xl font-semibold text-blue-500 mb-6">
             Send a Message
           </h2>
@@ -44,10 +51,16 @@ function Contact() {
               Send Message
             </button>
           </div>
-        </div>
+        </motion.div>
 
         {/* Contact Info */}
-        <div className="text-white space-y-10">
+        <motion.div
+          className="text-white space-y-10"
+          initial={{ opacity: 0, x: 80 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: false, amount: 0.3 }}
+          transition={{ duration: 0.8 }}
+        >
           <h2 className="text-2xl font-semibold text-blue-500">
             Contact Information
           </h2>
@@ -96,21 +109,17 @@ function Contact() {
               Connect With Me
             </h3>
             <div className="flex gap-4">
-              <div className="p-3 bg-slate-800 rounded-full hover:bg-blue-600 transition cursor-pointer">
-                <Facebook />
-              </div>
-              <div className="p-3 bg-slate-800 rounded-full hover:bg-blue-600 transition cursor-pointer">
-                <Github />
-              </div>
-              <div className="p-3 bg-slate-800 rounded-full hover:bg-blue-600 transition cursor-pointer">
-                <Linkedin />
-              </div>
-              <div className="p-3 bg-slate-800 rounded-full hover:bg-blue-600 transition cursor-pointer">
-                <Instagram />
-              </div>
+              {[Facebook, Github, Linkedin, Instagram].map((Icon, idx) => (
+                <div
+                  key={idx}
+                  className="p-3 bg-slate-800 rounded-full hover:bg-blue-600 transition cursor-pointer"
+                >
+                  <Icon />
+                </div>
+              ))}
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </div>
   );

@@ -1,13 +1,6 @@
 import React from "react";
-import {
-  FileCode,
-  Palette,
-  Braces,
-  Layout,
-  Wind,
-  Server,
-  Atom,
-} from "lucide-react";
+import { FileCode, Palette, Braces, Layout, Wind, Server, Atom, FolderCode } from "lucide-react";
+import { motion } from "framer-motion";
 
 function Skills() {
   const skills = [
@@ -18,7 +11,7 @@ function Skills() {
     { name: "Tailwind CSS", icon: <Wind size={28} /> },
     { name: "Node.js", icon: <Server size={28} /> },
     { name: "React JS", icon: <Atom size={28} /> },
-    { name: "Python", icon: <Server size={28} /> }, // Added skill
+    { name: "Python", icon: <FolderCode size={28} /> },
   ];
 
   return (
@@ -34,15 +27,19 @@ function Skills() {
       {/* Skills Grid */}
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-10 max-w-6xl mx-auto">
         {skills.map((skill, index) => (
-          <div
+          <motion.div
             key={index}
             className="bg-slate-900 rounded-2xl p-8 flex flex-col items-center justify-center text-center shadow-lg hover:shadow-blue-600/30 hover:-translate-y-2 transition duration-300"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.3 }}
+            transition={{ duration: 0.6, delay: index * 0.15 }}
           >
             <div className="p-4 bg-blue-600/20 rounded-full text-blue-500 mb-4">
               {skill.icon}
             </div>
             <h3 className="text-white text-lg font-semibold">{skill.name}</h3>
-          </div>
+          </motion.div>
         ))}
       </div>
     </section>

@@ -1,5 +1,6 @@
 import React from 'react'
-import image from '../assets/image/image.png'
+import image2 from '../assets/image/image2.png'
+import { motion } from 'framer-motion'
 
 function Home() {
   return (
@@ -7,7 +8,13 @@ function Home() {
       <div className="container mx-auto flex flex-col-reverse lg:flex-row items-center justify-between px-6 lg:px-16 py-10 gap-12">
 
         {/* LEFT SIDE */}
-        <div className="text-center lg:text-left max-w-xl">
+        <motion.div
+          className="text-center lg:text-left max-w-xl"
+          initial={{ opacity: 0, x: -80 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: false, amount: 0.3 }}
+          transition={{ duration: 0.8 }}
+        >
           <h2 className="text-blue-500 font-bold text-xl sm:text-2xl">
             Hello Everyone, I'm
           </h2>
@@ -32,16 +39,22 @@ function Home() {
               Contact Me
             </button>
           </div>
-        </div>
+        </motion.div>
 
         {/* RIGHT SIDE IMAGE */}
-        <div className="w-60 h-60 sm:w-72 sm:h-72 lg:w-96 lg:h-96 rounded-full overflow-hidden border-8 border-blue-600 flex-shrink-0">
+        <motion.div
+          className="w-60 h-60 sm:w-72 sm:h-72 lg:w-96 lg:h-96 rounded-full overflow-hidden border-8 border-blue-600 flex-shrink-0"
+          initial={{ opacity: 0, scale: 0.8 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: false, amount: 0.3 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+        >
           <img
-            src={image}
+            src={image2}
             alt="Profile"
             className="w-full h-full object-cover"
           />
-        </div>
+        </motion.div>
 
       </div>
     </div>
