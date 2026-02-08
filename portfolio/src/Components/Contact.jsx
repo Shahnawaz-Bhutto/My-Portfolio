@@ -17,7 +17,7 @@ const SOCIAL_LINKS = [
   },
   {
     icon: Github,
-    link: "https://github.com/yourusername",
+    link: "https://github.com/Shahnawaz-Bhutto",
   },
   {
     icon: Linkedin,
