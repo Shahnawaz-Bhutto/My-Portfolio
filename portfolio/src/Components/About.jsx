@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 
 function About() {
   return (
-    <section className="w-full bg-slate-900 py-16">
+    <section className="w-full bg-slate-900 py-16 " id='About'>
       <div className="container mx-auto px-6 lg:px-16 flex flex-col lg:flex-row items-center gap-12">
 
         {/* IMAGE SIDE */}

@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 function Contact() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-indigo-950 to-black flex items-center justify-center px-4 py-16">
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-indigo-950 to-black flex items-center justify-center px-4 py-16" id="Contact">
       <div className="max-w-6xl w-full grid grid-cols-1 lg:grid-cols-2 gap-12">
 
         {/* Contact Form */}
