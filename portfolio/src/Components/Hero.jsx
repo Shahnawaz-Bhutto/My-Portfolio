@@ -27,7 +27,7 @@ function Hero() {
           </h1>
 
           <h3 className="mt-4 text-xl sm:text-2xl lg:text-3xl text-slate-300">
-            Frontend Web Developer
+            Full Stack Web Developer
           </h3>
 
           <p className="mt-6 text-base sm:text-lg text-slate-400 leading-relaxed max-w-xl">
