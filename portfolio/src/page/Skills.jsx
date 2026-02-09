@@ -1,5 +1,6 @@
 import React from "react";
 import { FileCode, Palette, Braces, Layout, Wind, Server, Atom, FolderCode } from "lucide-react";
+// eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 
 function Skills() {

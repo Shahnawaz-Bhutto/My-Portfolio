@@ -1,5 +1,6 @@
 import React from 'react'
 import { Github, Mail, MessageCircle } from 'lucide-react'
+// eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion'
 
 function Footer() {

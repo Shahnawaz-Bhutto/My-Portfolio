@@ -1,5 +1,6 @@
 import React from 'react'
 import image from '../assets/image/image2.png' // change if needed
+// eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion'
 
 function Hero() {

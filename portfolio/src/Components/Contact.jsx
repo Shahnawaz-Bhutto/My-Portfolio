@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Mail,
   Phone,
@@ -7,42 +7,25 @@ import {
   Linkedin,
   MessageCircle,
 } from "lucide-react";
+// eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 
-// Social links (pure JS – safe for .jsx)
+// Social links
 const SOCIAL_LINKS = [
-  {
-    icon: MessageCircle,
-    link: "https://wa.me/923555869818", // WhatsApp
-  },
-  {
-    icon: Github,
-    link: "https://github.com/Shahnawaz-Bhutto",
-  },
-  {
-    icon: Linkedin,
-    link: "https://linkedin.com/in/yourprofile",
-  },
-  {
-    icon: Mail,
-    link: "mailto:shahnawazbhutto000@gmail.com", // Gmail
-  },
+  { icon: MessageCircle, link: "https://wa.me/923555869818" }, // WhatsApp
+  { icon: Github, link: "https://github.com/Shahnawaz-Bhutto" },
+  { icon: Linkedin, link: "https://linkedin.com/in/Shahnawaz Bhutto" },
+  { icon: Mail, link: "mailto:shahnawazbhutto000@gmail.com" },
 ];
 
 function Contact() {
-  // DOM-based submit handler (NO TypeScript, JSX-safe)
+  // React state for form fields
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    const nameInput = document.getElementById("name");
-    const emailInput = document.getElementById("email");
-    const messageInput = document.getElementById("message");
-
-    if (!nameInput || !emailInput || !messageInput) return;
-
-    const name = nameInput.value.trim();
-    const email = emailInput.value.trim();
-    const message = messageInput.value.trim();
 
     if (!name || !email || !message) {
       alert("Please fill all fields");
@@ -52,8 +35,10 @@ function Contact() {
     console.log({ name, email, message });
     alert("Message sent successfully!");
 
-    const form = document.getElementById("contactForm");
-    if (form) form.reset();
+    // Reset form
+    setName("");
+    setEmail("");
+    setMessage("");
   };
 
   return (
@@ -70,15 +55,18 @@ function Contact() {
           viewport={{ once: false, amount: 0.3 }}
           transition={{ duration: 0.8 }}
         >
-          <h2 className="text-2xl font-semibold text-blue-500 mb-6">Send a Message</h2>
+          <h2 className="text-2xl font-semibold text-blue-500 mb-6">
+            Send a Message
+          </h2>
 
-          <form id="contactForm" onSubmit={handleSubmit} className="space-y-5">
+          <form onSubmit={handleSubmit} className="space-y-5">
             <div>
               <label className="text-gray-300 text-sm">Name</label>
               <input
-                id="name"
                 type="text"
                 placeholder="Your name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
                 className="w-full mt-1 px-4 py-3 rounded-lg bg-slate-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
@@ -86,9 +74,10 @@ function Contact() {
             <div>
               <label className="text-gray-300 text-sm">Email</label>
               <input
-                id="email"
                 type="email"
                 placeholder="Your email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 className="w-full mt-1 px-4 py-3 rounded-lg bg-slate-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
@@ -96,9 +85,10 @@ function Contact() {
             <div>
               <label className="text-gray-300 text-sm">Message</label>
               <textarea
-                id="message"
                 rows={4}
                 placeholder="Your message"
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
                 className="w-full mt-1 px-4 py-3 rounded-lg bg-slate-800 text-white placeholder-gray-400 resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
@@ -120,7 +110,9 @@ function Contact() {
           viewport={{ once: false, amount: 0.3 }}
           transition={{ duration: 0.8 }}
         >
-          <h2 className="text-2xl font-semibold text-blue-500">Contact Information</h2>
+          <h2 className="text-2xl font-semibold text-blue-500">
+            Contact Information
+          </h2>
 
           <div className="flex items-start gap-4">
             <div className="p-3 bg-blue-600/20 rounded-full">
@@ -153,19 +145,24 @@ function Contact() {
           </div>
 
           <div>
-            <h3 className="text-xl font-semibold text-blue-500 mb-4">Connect With Me</h3>
+            <h3 className="text-xl font-semibold text-blue-500 mb-4">
+              Connect With Me
+            </h3>
             <div className="flex gap-4">
-              {SOCIAL_LINKS.map(({ icon: Icon, link }, idx) => (
-                <a
-                  key={idx}
-                  href={link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="p-3 bg-slate-800 rounded-full hover:bg-blue-600 transition cursor-pointer"
-                >
-                  <Icon />
-                </a>
-              ))}
+              {SOCIAL_LINKS.map(({ icon, link }, idx) => {
+                const IconComponent = icon;
+                return (
+                  <a
+                    key={idx}
+                    href={link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-3 bg-slate-800 rounded-full hover:bg-blue-600 transition cursor-pointer"
+                  >
+                    <IconComponent size={24} />
+                  </a>
+                );
+              })}
             </div>
           </div>
         </motion.div>

@@ -1,5 +1,6 @@
 import React from 'react'
 import image from '../assets/image/image.png'
+// eslint-disable-next-line no-unused-vars
 import { motion } from 'framer-motion'
 
 function About() {

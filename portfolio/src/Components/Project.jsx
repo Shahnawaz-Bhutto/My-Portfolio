@@ -1,4 +1,5 @@
 import React from "react";
+// eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import { ExternalLink } from "lucide-react";
 
@@ -29,6 +30,21 @@ const projects = [
   },
 ];
 
+// Framer-motion variants for container and cards
+const containerVariants = {
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.2,
+    },
+  },
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 50 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+};
+
 const Projects = () => {
   return (
     <section
@@ -43,15 +59,23 @@ const Projects = () => {
         </p>
       </div>
 
-      {/* Cards */}
-      <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-3">
+      {/* Cards with scroll animation */}
+      <motion.div
+        className="grid gap-12 sm:grid-cols-2 lg:grid-cols-3"
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.3 }}
+      >
         {projects.map((project, index) => (
           <motion.div
             key={index}
-            initial={{ opacity: 0, y: 60 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: index * 0.2 }}
-            className="bg-slate-900 rounded-2xl overflow-hidden shadow-xl border border-slate-800 hover:border-blue-500 transition"
+            variants={cardVariants}
+            whileHover={{
+              scale: 1.05,
+              boxShadow: "0px 15px 25px rgba(0, 0, 0, 0.4)",
+            }}
+            className="bg-slate-900 rounded-2xl overflow-hidden shadow-xl border border-slate-800 hover:border-blue-500 transition-all"
           >
             {/* Image */}
             <img
@@ -62,13 +86,9 @@ const Projects = () => {
 
             {/* Content */}
             <div className="p-6">
-              <h3 className="text-2xl font-semibold mb-3">
-                {project.title}
-              </h3>
+              <h3 className="text-2xl font-semibold mb-3">{project.title}</h3>
 
-              <p className="text-slate-400 mb-4">
-                {project.description}
-              </p>
+              <p className="text-slate-400 mb-4">{project.description}</p>
 
               {/* Tech stack */}
               <div className="flex flex-wrap gap-2 mb-6">
@@ -84,7 +104,7 @@ const Projects = () => {
 
               {/* Button */}
               <a
-                href={project.live}
+                href={project.live || "#"}
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center gap-2 text-blue-400 hover:text-blue-300"
@@ -94,7 +114,7 @@ const Projects = () => {
             </div>
           </motion.div>
         ))}
-      </div>
+      </motion.div>
     </section>
   );
 };
