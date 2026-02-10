@@ -30,21 +30,6 @@ const projects = [
   },
 ];
 
-// Framer-motion variants for container and cards
-const containerVariants = {
-  hidden: {},
-  show: {
-    transition: {
-      staggerChildren: 0.2,
-    },
-  },
-};
-
-const cardVariants = {
-  hidden: { opacity: 0, y: 50 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
-};
-
 const Projects = () => {
   return (
     <section
@@ -52,25 +37,28 @@ const Projects = () => {
       className="min-h-screen bg-slate-950 text-white px-6 py-20"
     >
       {/* Heading */}
-      <div className="text-center mb-16">
+      <motion.div
+        className="text-center mb-16"
+        initial={{ opacity: 0, y: 80 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.9, ease: "easeOut" }}
+        viewport={{ once: false, amount: 0.3 }}
+      >
         <h2 className="text-4xl font-bold mb-3">My Projects</h2>
         <p className="text-slate-400">
           Here are some of the projects I have built recently
         </p>
-      </div>
+      </motion.div>
 
-      {/* Cards with scroll animation */}
-      <motion.div
-        className="grid gap-12 sm:grid-cols-2 lg:grid-cols-3"
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true, amount: 0.3 }}
-      >
+      {/* Cards */}
+      <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-3">
         {projects.map((project, index) => (
           <motion.div
             key={index}
-            variants={cardVariants}
+            initial={{ opacity: 0, y: 80 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut", delay: index * 0.2 }}
+            viewport={{ once: false, amount: 0.3 }}
             whileHover={{
               scale: 1.05,
               boxShadow: "0px 15px 25px rgba(0, 0, 0, 0.4)",
@@ -114,7 +102,7 @@ const Projects = () => {
             </div>
           </motion.div>
         ))}
-      </motion.div>
+      </div>
     </section>
   );
 };
