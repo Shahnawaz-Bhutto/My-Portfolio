@@ -1,4 +1,5 @@
 import React from "react";
+// eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import { ExternalLink } from "lucide-react";
 
@@ -37,7 +38,7 @@ const Projects = () => {
   return (
     <section
       id="projects"
-      className="min-h-screen bg-slate-950 text-white px-6 py-20"
+      className="min-h-screen bg-slate-900 text-white px-6 py-20"
     >
       <motion.div
         className="text-center mb-16"
