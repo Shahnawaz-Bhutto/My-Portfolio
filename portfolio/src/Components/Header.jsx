@@ -1,10 +1,7 @@
-// Import React hook for state management
+// Import useState for menu toggle
 import { useState } from "react"
 
 // Import animation tools from Framer Motion
-// motion → used to animate elements
-// AnimatePresence → allows exit animation when component disappears
-// eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from "framer-motion"
 
 function Header() {
@@ -12,8 +9,7 @@ function Header() {
   // State to control mobile menu open/close
   const [open, setOpen] = useState(false)
 
-  // Navigation menu items (array of objects)
-  // Each object contains name (text) and link (section ID)
+  // Navigation menu items
   const menu = [
     { name: "Home", link: "#home" },
     { name: "About", link: "#about" },
@@ -24,31 +20,44 @@ function Header() {
   ]
 
   return (
-
-    // Header container
-    // relative & z-50 ensures it stays above other elements
+    // Header container (same color everywhere)
     <header className="bg-blue-950 text-white shadow-lg relative z-50">
 
-      {/* Top Navbar Section */}
-      <div className="container mx-auto flex items-center justify-between px-6 py-4">
+      {/* =========================
+          TOP NAVBAR SECTION
+         ========================= */}
+      <div className="container mx-auto flex items-center justify-between px-6 lg:px-16 py-4">
 
         {/* Logo / Name */}
-        <h1 className="text-blue-500 text-2xl font-bold">
+        <h1 className="text-blue-500 text-2xl sm:text-3xl font-bold">
           Shahnawaz Bhutto
         </h1>
 
         {/* =========================
-            HAMBURGER MENU BUTTON
+            DESKTOP MENU
            ========================= */}
+        <ul className="hidden lg:flex gap-8 text-lg font-medium">
+          {menu.map((item) => (
+            <li key={item.name}>
+              <a
+                href={item.link}
+                className="hover:text-blue-400 transition duration-300"
+              >
+                {item.name}
+              </a>
+            </li>
+          ))}
+        </ul>
 
-        {/* This button is visible only on small screens (lg:hidden) */}
+        {/* =========================
+            HAMBURGER MENU (Mobile)
+           ========================= */}
         <div
           className="lg:hidden cursor-pointer"
-          onClick={() => setOpen(!open)} // Toggle menu open/close
+          onClick={() => setOpen(!open)} // Toggle open/close
         >
 
           {/* Top Line */}
-          {/* When open → rotate 45° and move down */}
           <motion.div
             animate={open ? { rotate: 45, y: 8 } : { rotate: 0, y: 0 }}
             transition={{ duration: 0.3 }}
@@ -56,7 +65,6 @@ function Header() {
           />
 
           {/* Middle Line */}
-          {/* When open → disappear (opacity 0) */}
           <motion.div
             animate={open ? { opacity: 0 } : { opacity: 1 }}
             transition={{ duration: 0.3 }}
@@ -64,7 +72,6 @@ function Header() {
           />
 
           {/* Bottom Line */}
-          {/* When open → rotate -45° and move up */}
           <motion.div
             animate={open ? { rotate: -45, y: -8 } : { rotate: 0, y: 0 }}
             transition={{ duration: 0.3 }}
@@ -75,77 +82,52 @@ function Header() {
       </div>
 
       {/* =========================
-         MOBILE MENU SECTION
+          MOBILE MENU (Animated)
          ========================= */}
-
-      {/* AnimatePresence allows exit animation when closing */}
       <AnimatePresence>
 
-        {/* Show menu only if open is true */}
         {open && (
-
-          // Animated dropdown container
           <motion.div
-
-            // Starting state (before appearing)
+            // Animation when opening
             initial={{ y: -20, opacity: 0 }}
-
-            // Animation when appearing
             animate={{ y: 0, opacity: 1 }}
 
-            // Animation when disappearing
+            // Animation when closing
             exit={{ y: -20, opacity: 0 }}
 
-            // Animation timing
             transition={{ duration: 0.4, ease: "easeInOut" }}
 
-            className="lg:hidden bg-blue-950 px-6 py-6"
+            // SAME COLOR as header
+            className="lg:hidden bg-blue-950 px-6 py-6 border-t border-blue-800"
           >
-
-            {/* Menu list */}
             <ul className="flex flex-col gap-6 text-lg font-medium">
 
-              {/* Loop through menu array */}
               {menu.map((item, index) => (
-
-                // Each item has its own animation
                 <motion.li
                   key={item.name}
-
-                  // Start slightly left and invisible
                   initial={{ x: -30, opacity: 0 }}
-
-                  // Animate to normal position
                   animate={{ x: 0, opacity: 1 }}
-
-                  // Delay based on index → creates stagger effect
                   transition={{
                     delay: index * 0.1,
                     duration: 0.4,
                   }}
                 >
-
-                  {/* Navigation link */}
                   <a
                     href={item.link}
-
-                    // Close menu when clicking any link
-                    onClick={() => setOpen(false)}
-
+                    onClick={() => setOpen(false)} // Close after click
                     className="block hover:text-blue-400 transition duration-300"
                   >
                     {item.name}
                   </a>
-
                 </motion.li>
               ))}
 
             </ul>
-
           </motion.div>
         )}
 
       </AnimatePresence>
+
     </header>
   )
 }
