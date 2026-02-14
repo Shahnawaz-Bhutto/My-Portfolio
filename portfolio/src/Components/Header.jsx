@@ -99,7 +99,7 @@ function Header() {
             // Animation timing
             transition={{ duration: 0.4, ease: "easeInOut" }}
 
-            className="lg:hidden bg-blue-900 px-6 py-6"
+            className="lg:hidden bg-blue-950 px-6 py-6"
           >
 
             {/* Menu list */}
